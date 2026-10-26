@@ -91,3 +91,5 @@ agent.run()
 ## Output:
 <img width="437" height="350" alt="Screenshot 2026-10-26 084914" src="https://github.com/user-attachments/assets/1ffed6da-b32b-457d-bd55-8d827cf9d721" />
 
+## Result
+Thus, the PEAS description was identified and the AI agent was successfully developed for the given problem.
