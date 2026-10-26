@@ -44,62 +44,50 @@
 ## Programm
 
 ```
-class VacuumCleanerAgent:
+class MedicineAgent:
     def __init__(self):
-        # Initialize the agent's state (location and dirt status)
-        self.location = "A"  # Initial location (can be "A" or "B")
-        self.dirt_status = {"A": False, "B": False}  # Initial dirt status (False means no dirt)
+        self.performance = 0
+        self.current_room = 1
 
-    def move_left(self):
-        # Move the agent to the left if possible
-        if self.location == "B":
-            self.location = "A"
+    def check_patient(self, room, temperature):
+        print("\nChecking Room", room)
+        print("Patient Temperature:", temperature, "F")
 
-    def move_right(self):
-        # Move the agent to the right if possible
-        if self.location == "A":
-            self.location = "B"
-
-    def suck_dirt(self):
-        # Suck dirt in the current location if there is dirt
-        if self.dirt_status[self.location]:
-            self.dirt_status[self.location] = False
-            print(f"Sucked dirt in location {self.location}")
-
-    def do_nothing(self):
-        # Do nothing
-        pass
-
-    def perform_action(self, action):
-        # Perform the specified action
-        if action == "left":
-            self.move_left()
-        elif action == "right":
-            self.move_right()
-        elif action == "suck":
-            self.suck_dirt()
-        elif action == "nothing":
-            self.do_nothing()
+        if temperature > 98.5:
+            print("Patient has fever.")
+            print("Medicine prescribed and treatment given.")
+            self.performance += 10
         else:
-            print("Invalid action")
+            print("Patient is healthy. No medicine needed.")
 
-    def print_status(self):
-        # Print the current status of the agent
-        print(f"Location: {self.location}, Dirt Status: {self.dirt_status}")
+    def move_to_room(self, room):
+        if self.current_room != room:
+            print("\nMoving from Room", self.current_room,
+                  "to Room", room)
+            self.performance -= 1
+            self.current_room = room
+
+    def run(self):
+        print("Medicine Prescribing Agent")
+
+        # Patient temperatures in two rooms
+        room1_temp = float(input("Enter Room 1 patient temperature: "))
+        room2_temp = float(input("Enter Room 2 patient temperature: "))
+
+        # Check Room 1
+        self.check_patient(1, room1_temp)
+
+        # Move to Room 2
+        self.move_to_room(2)
+        self.check_patient(2, room2_temp)
+
+        print("\nFinal Performance Score:", self.performance)
 
 
-# Example usage:
-agent = VacuumCleanerAgent()
-
-# Move the agent, suck dirt, and do nothing
-agent.perform_action("left")
-agent.print_status()
-
-agent.perform_action("suck")
-agent.print_status()
-
-agent.perform_action("nothing")
-agent.print_status()
+# Create and run the AI agent
+agent = MedicineAgent()
+agent.run()
 ```
-<img width="512" height="90" alt="Screenshot 2026-10-26 082032" src="https://github.com/user-attachments/assets/015b93ee-38d0-479d-9ed2-371522a5f6b0" />
+## Output:
+<img width="437" height="350" alt="Screenshot 2026-10-26 084914" src="https://github.com/user-attachments/assets/1ffed6da-b32b-457d-bd55-8d827cf9d721" />
 
